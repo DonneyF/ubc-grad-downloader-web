@@ -7,50 +7,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>UBC Graduation Video Downloader</title>
 </head>
 
 <body>
 
-    <div class="container">
-        <!-- Header -->
-        <div class="row bg-primary align-items-center" style="height: 5rem;">
-            <section class="col text-center">
-                <h2 class="align-middle">UBC Graduation Video Downloader</h2>
-            </section>
-        </div>
+    <style>
+        .bg-primary {
+            background-color: #4b7bec !important;
+        }
 
-        <!-- Download Form-->
-        <div class="row bg-secondary align-items-center" style="height: 20rem;">
-            <div class="col-md-8 offset-md-2">
-                </br>
-                <form>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="UBC Graduation Video url" id="videoUrl" aria-label="Video URL">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="button" id="submit">Submit</button>
-                        </div>
-                    </div>
-                </form>
+        .bg-secondary {
+            background-color: #d1d8e0 !important;
+        }
+
+        .btn-primary {
+            background-color: #4b7bec !important;
+        }
+
+        .text-primary {
+            color: #3867d6 !important;
+        }
+
+        .text-secondary {
+            color: #202020 !important;
+        }
+
+        body {
+            font-family: Lato;
+        }
+
+        code {
+            border-radius: 5px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            border: 1px solid #BCBEC0;
+            padding: 2px;
+        }
+        /* Responsive Header Text */
+        @media screen and (max-width: 767px) {
+            #header-text {
+                font-size: calc(25px + 6 * ((100vw - 320px) / 680));
+            }
+        }
+    </style>
+    <!-- Header -->
+    <header class="bg-primary">
+        <div class="container">
+            <div class="row align-items-center" style="height: 5rem;">
+                <section class="col text-center ">
+                    <h2 class="align-middle text-secondary font-weight-bold" id="header-text">UBC Graduation Video Downloader</h2>
+                </section>
             </div>
         </div>
-        
-        <!-- Download Information-->
-        <div class="row bg-white" style="height: 20rem;">
-            <section class="col">
-                <p>This tool supports downloading videos from the UBC Graduation page.</p>
-            </section>
+    </header>
+
+    <!-- Download Form-->
+    <section class="bg-secondary mb-3">
+        <div class="container">
+            <div class="row align-items-center" style="height: 20rem;">
+                <div class="col-md-8 offset-md-2">
+                    </br>
+                    <form>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="UBC Graduation Video url" id="videoUrl" aria-label="Video URL">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button" id="submit2" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    </section>
+
+    <!-- Download Information-->
+    <section>
+        <div class="container">
+            <div class="row bg-white" style="height: 20rem;">
+                <section class="col">
+                    <h3 class="">How to use:</h3>
+                    <p>This tool supports downloading webcasts and videos from the <a href="https://graduation.ubc.ca/event/live-webcast/">UBC
+                            Graduation website</a>. Visit any graduation ceremony recording on that page and simply submit
+                        a URL such as <code>https://graduation.ubc.ca/event/live-webcast/event175/</code>. </p>
+                </section>
+            </div>
         </div>
-    
-    </div><!-- container -->
+    </section>
 
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script>
-        $("#submit" ).click(function() {
+        $("#submit").click(function () {
+            // Get the url
             var url = $('#videoUrl').val();
-            
+
+            // Send API request
             $.ajax({
                 url: "https://rno8u4i01m.execute-api.us-west-2.amazonaws.com/prod/UBCGraduationDownloader",
                 type: "POST",
@@ -59,14 +113,36 @@
                 data: {
                     url: url
                 },
+                // Function to run on success
                 success: function (response) {
                     console.log(response);
                 },
-                error: function(response) {
+                // Function to run on error
+                error: function (response) {
                     console.log(response);
                 }
             });
-        }); 
+        });
+
+        $('.btn').on('click', function () {
+            var $this = $(this);
+            var loadingText = '<i class="fa fa-circle-o-notch fa-spin"></i> Loading...';
+            if ($(this).html() !== loadingText) {
+                // Store original text
+                $this.data('original-text', $(this).html());
+                // Set disabled state for button
+                $this.addClass('disabled');
+                // Set loading text
+                $this.html(loadingText);
+            }
+            // Function to run after timeout
+            setTimeout(function () {
+                // Set the original text
+                $this.html($this.data('original-text'));
+                // Remove disabled state
+                $this.removeClass('disabled');
+            }, 2000);
+        });
     </script>
 </body>
 
