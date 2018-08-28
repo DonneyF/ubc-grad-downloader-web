@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>UBC Graduation Video Downloader</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="row bg-primary align-items-center" style="height: 5rem;">
+            <section class="col text-center">
+                <h2 class="align-middle">UBC Graduation Video Downloader</h2>
+            </section>
+        </div>
+
+        <!-- Download Form-->
+        <div class="row bg-secondary align-items-center" style="height: 20rem;">
+            <div class="col-md-8 offset-md-2">
+                </br>
+                <form>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="UBC Graduation Video url" id="videoUrl" aria-label="Video URL">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" id="submit">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Download Information-->
+        <div class="row bg-white" style="height: 20rem;">
+            <section class="col">
+                <p>This tool supports downloading videos from the UBC Graduation page.</p>
+            </section>
+        </div>
+    
+    </div><!-- container -->
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        $("#submit" ).click(function() {
+            var url = $('#videoUrl').val();
+            
+            $.ajax({
+                url: "https://rno8u4i01m.execute-api.us-west-2.amazonaws.com/prod/UBCGraduationDownloader",
+                type: "POST",
+                crossDomain: true,
+                dataType: 'json',
+                data: {
+                    url: url
+                },
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function(response) {
+                    console.log(response);
+                }
+            });
+        }); 
+    </script>
+</body>
+
+</html>
