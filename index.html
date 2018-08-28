@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>UBC Graduation Video Downloader</title>
@@ -46,6 +46,7 @@
             border: 1px solid #BCBEC0;
             padding: 2px;
         }
+
         /* Responsive Header Text */
         @media screen and (max-width: 767px) {
             #header-text {
@@ -67,19 +68,32 @@
     <!-- Download Form-->
     <section class="bg-secondary mb-3">
         <div class="container">
-            <div class="row align-items-center" style="height: 20rem;">
-                <div class="col-md-8 offset-md-2">
-                    </br>
+            <div class="row" style="height: 10rem;">
+                <div class="col-md-8 offset-md-2" style="margin-top: 5rem;">
                     <form>
-                        <div class="input-group mb-3">
+                        <div class="input-group">
                             <input type="text" class="form-control" placeholder="UBC Graduation Video url" id="videoUrl" aria-label="Video URL">
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button" id="submit2" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing">Submit</button>
+                                <button class="btn btn-primary" type="button" id="submit">Submit</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
+            <!-- Hidden download information -->
+            <div class=col" id="downloadForm" style="display: none;" >
+                <video controls class="embed-responsive">
+                    <source type="video/mp4">
+                    Your browser does not support the video tag.
+                    </video>
+                <div class="text-center mt-4">
+                    <a id="videoSrc" download target="_blank">
+                    <button class="btn btn-primary btn-lg mb-4" type="button">
+                        <i class="fa fa-download mr-2"></i>Download</button>
+                    </a>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Download Information-->
@@ -91,16 +105,17 @@
                     <p>This tool supports downloading webcasts and videos from the <a href="https://graduation.ubc.ca/event/live-webcast/">UBC
                             Graduation website</a>. Visit any graduation ceremony recording on that page and simply submit
                         a URL such as <code>https://graduation.ubc.ca/event/live-webcast/event175/</code>. </p>
+                        <p>This tool is not supported on Internet Explorer.</p>
                 </section>
             </div>
         </div>
     </section>
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script>
-        $("#submit").click(function () {
+        $("#submit2").click(function () {
             // Get the url
             var url = $('#videoUrl').val();
 
@@ -124,9 +139,9 @@
             });
         });
 
-        $('.btn').on('click', function () {
+        $('#submit').on('click', function () {
             var $this = $(this);
-            var loadingText = '<i class="fa fa-circle-o-notch fa-spin"></i> Loading...';
+            var loadingText = '<i class="fa fa-circle-o-notch fa-spin mr-1"></i> Loading...';
             if ($(this).html() !== loadingText) {
                 // Store original text
                 $this.data('original-text', $(this).html());
@@ -141,6 +156,15 @@
                 $this.html($this.data('original-text'));
                 // Remove disabled state
                 $this.removeClass('disabled');
+
+                // Set video url and load video
+                $("#downloadForm video").attr("src", "https://www.w3schools.com/html/mov_bbb.mp4");
+                $("#videoSrc").attr("href", "https:////www.w3schools.com/html/mov_bbb.mp4");
+                $("#downloadForm video")[0].load();
+                // $("video").get(0).play();
+
+                // Enable download button visibility
+                $("#downloadForm").show();
             }, 2000);
         });
     </script>
