@@ -2,18 +2,19 @@
 <html lang="en">
 
 <head>
+    <title>UBC Graduation Video Downloader</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="A tool to download UBC Graduation Videos in their original quality. Download free, no ads, and without plugins.">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-    <title>UBC Graduation Video Downloader</title>
 </head>
 
 <body>
-
     <style>
         .bg-primary {
             background-color: #4b7bec !important;
@@ -39,38 +40,11 @@
             font-family: Lato;
         }
 
-        pre {
-            background: #f4f4f4;
-            border: 1px solid #ddd;
-            border-left: 3px solid #45aaf2;
-            color: #202020;
-            page-break-inside: avoid;
-            font-family: monospace;
-            font-size: 15px;
-            line-height: 1;
-            margin-bottom: 1em;
-            max-width: 100%;
-            overflow: auto;
-            padding: 1em 1.5em;
-            display: block;
-            word-wrap: break-word;
-        }
-
         code {
             border-radius: 5px;
             -moz-border-radius: 5px;
             -webkit-border-radius: 5px;
             border: 1px solid #BCBEC0;
-            padding: 2px;
-            font: 12px;
-            font-family: Consolas, monospace;
-        }
-
-        pre code {
-            border-radius: 0px;
-            -moz-border-radius: 0px;
-            -webkit-border-radius: 0px;
-            border: 0px;
             padding: 2px;
             font: 12px;
             font-family: Consolas, monospace;
@@ -95,7 +69,7 @@
     </header>
 
     <!-- Download Form-->
-    <section class="bg-secondary mb-3 pb-4">
+    <section class="bg-secondary mb-4 pb-4">
         <div class="container">
             <div class="row">
                 <div class="col-md-8 offset-md-2" style="margin-top: 5rem; margin-bottom: 3rem;">
@@ -131,17 +105,14 @@
     <!-- Download Information-->
     <section>
         <div class="container">
-            <div class="row bg-white" style="height: 20rem;">
+            <div class="row bg-white">
                 <section class="col">
                     <h3 class="">How to use this tool:</h3>
                     <p>This tool supports downloading webcasts and videos from the <a href="https://graduation.ubc.ca/event/live-webcast/">UBC
                             Graduation website</a>. Visit any graduation ceremony recording on that page and simply submit
                         a URL such as <code>https://graduation.ubc.ca/event/live-webcast/event175/</code>.
                     </p>
-                    <p>If you experience any errors, you can alternatively use the pop-out player URL.
-                        <pre><code>https://mediasitemob1.mediagroup.ubc.ca/Mediasite/Play/0ce656af51b5416abc1c3ce275f89f621d?autoStart=false</code></pre>
-                    </p>
-                    <p>This tool is not supported on Internet Explorer.</p>
+                    <p>If the submission is successful, the tool will display a video player and a download link beneath.</p>
                 </section>
             </div>
         </div>
@@ -224,7 +195,5 @@
             });
         });
     </script>
-
 </body>
-
 </html>
